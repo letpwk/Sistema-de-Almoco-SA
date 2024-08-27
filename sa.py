@@ -92,10 +92,15 @@ class Responsavel(UsuariosDoIfro):
         return self.usuario and self.senha'''
         
         
-        
+import random
+import string
 from abc import ABC, abstractmethod
 
+# Função para gerar uma chave de acesso aleatória
+def gerar_chave_acesso():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
 
+# Superclasse abstrata
 class Usuario(ABC):
     def __init__(self, nome, cpf, rg, naturalidade, email, senha, numero):
         self.nome = nome
@@ -113,7 +118,7 @@ class Usuario(ABC):
     def validar_login(self, senha):
         return self._senha == senha
 
-
+# Subclasse Aluno
 class Aluno(Usuario):
     def __init__(self, nome, cpf, rg, naturalidade, email, senha, numero, matricula, pai, mae, curso, turma_turno, serie):
         super().__init__(nome, cpf, rg, naturalidade, email, senha, numero)
@@ -123,22 +128,28 @@ class Aluno(Usuario):
         self.curso = curso
         self.turma_turno = turma_turno
         self.serie = serie
+        self.chave_acesso = gerar_chave_acesso()  # Gerar e atribuir chave de acesso
 
     def cadastro(self):
         print(f"Aluno {self.nome} cadastrado com sucesso.")
+        print(f"Chave de acesso para o responsável: {self.chave_acesso}")
 
-
+# Subclasse Responsavel   usuario, nome, email, cpf, senha
 class Responsavel(Usuario):
-    def __init__(self, nome, cpf, rg, naturalidade, email, senha, numero, matricula_aluno):
-        super().__init__(nome, cpf, rg, naturalidade, email, senha, numero)
+    def __init__(self, nome, cpf, email, matricula_aluno, chave_acesso):
+        super().__init__(nome, cpf, email)
         self.matricula_aluno = matricula_aluno
+        self.chave_acesso = chave_acesso
 
     def cadastro(self):
         print(f"Responsável {self.nome} cadastrado com sucesso.")
 
-
-def criar_usuario():
-    tipo_usuario = input("Você deseja cadastrar um aluno ou responsável? (aluno/responsável): ").strip().lower()
+# Função para criar usuários (Alunos e Responsáveis)
+def criar_usuario(usuarios):
+    print('Como você deseja se cadastrar?')
+    print('1 - Aluno')
+    print('2 - Responsável')
+    tipo_usuario = input('Escolha o tipo de usuário: ')
 
     nome = input("Nome: ")
     cpf = input("CPF: ")
@@ -148,7 +159,7 @@ def criar_usuario():
     senha = input("Senha: ")
     numero = input("Número: ")
 
-    if tipo_usuario == "aluno":
+    if tipo_usuario == "1":
         matricula = input("Matrícula: ")
         pai = input("Pai: ")
         mae = input("Mãe: ")
@@ -156,10 +167,20 @@ def criar_usuario():
         turma_turno = input("Turma/Turno: ")
         serie = input("Série: ")
         usuario = Aluno(nome, cpf, rg, naturalidade, email, senha, numero, matricula, pai, mae, curso, turma_turno, serie)
+        print(f"Chave de acesso gerada para o responsável: {usuario.chave_acesso}")
     
-    elif tipo_usuario == "responsável":
+    elif tipo_usuario == "2":
         matricula_aluno = input("Matrícula do aluno: ")
-        usuario = Responsavel(nome, cpf, rg, naturalidade, email, senha, numero, matricula_aluno)
+        chave_acesso = input("Chave de acesso fornecida pelo aluno: ")
+        
+        # Verifica se a chave de acesso é válida
+        aluno_cadastrado = next((u for u in usuarios if isinstance(u, Aluno) and u.chave_acesso == chave_acesso and u.matricula == matricula_aluno), None)
+        
+        if aluno_cadastrado:
+            usuario = Responsavel(nome, cpf, rg, naturalidade, email, senha, numero, matricula_aluno, chave_acesso)
+        else:
+            print("Chave de acesso ou matrícula inválida.")
+            return None
     
     else:
         print("Tipo de usuário inválido.")
@@ -168,7 +189,7 @@ def criar_usuario():
     usuario.cadastro()
     return usuario
 
-
+# Função de login
 def login(usuarios):
     email = input("E-mail: ")
     senha = input("Senha: ")
@@ -181,11 +202,8 @@ def login(usuarios):
     print("Login falhou. E-mail ou senha incorretos.")
     return False
 
-
-usuarios = []
-
-
-def menu():
+# Função do menu
+def menu(usuarios):
     while True:
         print("\n1. Cadastrar usuário")
         print("2. Login")
@@ -193,7 +211,7 @@ def menu():
         opcao = input("Escolha uma opção: ")
 
         if opcao == '1':
-            usuario = criar_usuario()
+            usuario = criar_usuario(usuarios)
             if usuario:
                 usuarios.append(usuario)
         
@@ -206,8 +224,3 @@ def menu():
         
         else:
             print("Opção inválida. Tente novamente.")
-
-
-menu()
-
-        
