@@ -1,163 +1,107 @@
-'''import random
-from abc import ABC, abstractmethod, abstractmethod
-from enum import Enum
-#encapusulamento
-#get
-#set
-#
+#2° B Informática Vespertino
+#Programação Orientada a Objetos
+#Beatriz Souza da Rocha
+#Danielly Magno Barbosa
+#Letícia de Sousa e Silva
+#Maria Luisa Lôbo Gutierrez
 
-
-class TipoUsuario(Enum):
-    ESTUDANTE = "estudante"
-    RESPONSAVEL = "responsavel"
-
-
-class UsuariosDoIfro(ABC):
-    number = random.randint(1, 10)
-
-    def _init_(self, nome, email, cpf, senha, usuario):
-        self.usuario = usuario
-        self.nome = nome
-        self.email = email
-        self.cpf = cpf
-        self.senha = senha
-
-    def cadastro(self):
-        print('Cadastro de Usuários')
-        print('--------------------')
-        self.usuario = input('Usuário: ')
-        self.nome = input('Nome:  ')
-        self.email = input('Email: ')
-        self.cpf = input('CPF: ')
-        self.senha = input('Senha: ')
-
-        
-        #if usuario.usuario == self.usuario:
-            #print('Erro: Usuário já cadastrado!')
-            #return
-
-    @abstractmethod
-    def cadastro(self):
-        pass
-
-    def login(self):
-        if self.usuario == self.usuario and self.senha == self.senha:
-            print('Bem vindo,', self.nome)
-            return True
-        else:
-            print('Erro: Usuário ou senha incorretos, digite novamente')
-            return False
-
-
-class Estudante(UsuariosDoIfro):
-
-    def _init_(self, usuario, nome, email, cpf, senha, curso, turma, serie, pai, mae, telres):
-        super()._init_(usuario, nome, email, cpf, senha)
-        self.curso = curso
-        self.turma = turma
-        self.serie = serie
-        self.pai = pai
-        self.mae = mae
-        self.telres = telres
-
-
-def cadastro(self):
-    super().cadastro()
-    self.curso = input('Curso: ')
-    self.turma = input('Turma: ')
-    self.serie = input('Série: ')
-    self.pai = input('Nome do Pai: ')
-    self.mae = input('Nome da Mãe: ')
-    self.telres = input('Telefone Residencial: ')
-
-
-class Responsavel(UsuariosDoIfro):
-    def _init_(self, usuario, nome, email, cpf, senha):
-        super()._init_(usuario, nome, email, cpf, senha)
-        self.chave = random.randint(1, 10)
-
-    def cadastro(self):
-        super().cadastro()
-        self.chave = input('Chave de Acesso: ')
-
-    def ChaveDeAcesso(self):
-        chave = int(input('Insira a chave de acceso: '))
-        if chave == self.chave:
-            print('Seja bem-vindo,', self.nome)
-        else:
-            print('Chave de acesso incorreta, tente novamente.')
-        return
-
-    def get_login(self):
-        return self.usuario and self.senha'''
-        
-        
 import random
-import string
 from abc import ABC, abstractmethod
 
-# Função para gerar uma chave de acesso aleatória
-def gerar_chave_acesso():
-    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
 
-# Superclasse abstrata
+#método para gerar chave de acesso
+def gerar_chave_acesso():
+    caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    chave = ""
+    for _ in range(4):
+        chave += random.choice(caracteres)
+    return chave
+
+
+#classe mãe
 class Usuario(ABC):
-    def __init__(self, nome, cpf, rg, naturalidade, email, senha, numero):
-        self.nome = nome
-        self.cpf = cpf
-        self.rg = rg
-        self.naturalidade = naturalidade
-        self.email = email
-        self._senha = senha  # Atributo privado
-        self.numero = numero
+    def __init__(self, nome, cpf:int, rg:int, naturalidade, email, senha, telefone:int):
+        self.__nome = nome
+        self.__cpf = cpf
+        self.__rg = rg
+        self.__naturalidade = naturalidade
+        self.__email = email
+        self.__senha = senha  #atributo privado
+        self.__telefone = telefone
 
     @abstractmethod
     def cadastro(self):
         pass
-
+        
+    def get_senha(self):
+        return self.__senha
+        
     def validar_login(self, senha):
-        return self._senha == senha
+        return self.__senha == senha
 
-# Subclasse Aluno
+    def get_nome(self):
+        return self.__nome
+
+    def get_email(self):
+        return self.__email
+
+    def set_nome(self, nome):
+        self.__nome = nome
+
+    def set_email(self, email):
+        self.__email = email
+
+    def set_senha(self, senha):
+        self.__senha = senha
+
+    def set_telefone(self, telefone):
+        self.__telefone = telefone
+
+#subclasse
 class Aluno(Usuario):
-    def __init__(self, nome, cpf, rg, naturalidade, email, senha, numero, matricula, pai, mae, curso, turma_turno, serie):
-        super().__init__(nome, cpf, rg, naturalidade, email, senha, numero)
-        self.matricula = matricula
-        self.pai = pai
-        self.mae = mae
-        self.curso = curso
-        self.turma_turno = turma_turno
-        self.serie = serie
-        self.chave_acesso = gerar_chave_acesso()  # Gerar e atribuir chave de acesso
+    def __init__(self, nome, cpf, rg, naturalidade, email, senha, telefone, matricula, pai, mae, curso, turma_turno, serie):
+        super().__init__(nome, cpf, rg, naturalidade, email, senha, telefone)
+        self.__matricula = matricula
+        self.__pai = pai
+        self.__mae = mae
+        self.__curso = curso
+        self.__turma_turno = turma_turno
+        self.__serie = serie
+        self.__chave_acesso = gerar_chave_acesso() #gera a chave de acesso pro responsável
 
+    def get_chave_acesso(self):
+        return self.__chave_acesso
+
+    def get_matricula(self):
+        return self.__matricula
+        
     def cadastro(self):
-        print(f"Aluno {self.nome} cadastrado com sucesso.")
-        print(f"Chave de acesso para o responsável: {self.chave_acesso}")
+        print(f"\nAluno {self.get_nome()} cadastrado com sucesso!")
+        print(f"Chave de acesso para o responsável: {self.get_chave_acesso()}")
 
-# Subclasse Responsavel   usuario, nome, email, cpf, senha
+#subclasse
 class Responsavel(Usuario):
-    def __init__(self, nome, cpf, email, matricula_aluno, chave_acesso):
-        super().__init__(nome, cpf, email)
-        self.matricula_aluno = matricula_aluno
-        self.chave_acesso = chave_acesso
+    def __init__(self, nome, cpf, rg, naturalidade, email, senha, telefone, matricula, chave_acesso):
+        super().__init__(nome, cpf, rg, naturalidade, email, senha, telefone)
+        self.__matricula = matricula
+        self.__chave_acesso = chave_acesso
 
     def cadastro(self):
-        print(f"Responsável {self.nome} cadastrado com sucesso.")
+        print(f"\nResponsável {self.get_nome()} cadastrado com sucesso.")
 
-# Função para criar usuários (Alunos e Responsáveis)
 def criar_usuario(usuarios):
-    print('Como você deseja se cadastrar?')
+    print('\nComo você deseja se cadastrar?')
     print('1 - Aluno')
     print('2 - Responsável')
     tipo_usuario = input('Escolha o tipo de usuário: ')
 
-    nome = input("Nome: ")
+    nome = input("\nNome: ")
     cpf = input("CPF: ")
     rg = input("RG: ")
     naturalidade = input("Naturalidade: ")
     email = input("E-mail: ")
     senha = input("Senha: ")
-    numero = input("Número: ")
+    telefone = input("Número de celular: ")
 
     if tipo_usuario == "1":
         matricula = input("Matrícula: ")
@@ -166,46 +110,58 @@ def criar_usuario(usuarios):
         curso = input("Curso: ")
         turma_turno = input("Turma/Turno: ")
         serie = input("Série: ")
-        usuario = Aluno(nome, cpf, rg, naturalidade, email, senha, numero, matricula, pai, mae, curso, turma_turno, serie)
-        print(f"Chave de acesso gerada para o responsável: {usuario.chave_acesso}")
-    
-    elif tipo_usuario == "2":
-        matricula_aluno = input("Matrícula do aluno: ")
-        chave_acesso = input("Chave de acesso fornecida pelo aluno: ")
-        
-        # Verifica se a chave de acesso é válida
-        aluno_cadastrado = next((u for u in usuarios if isinstance(u, Aluno) and u.chave_acesso == chave_acesso and u.matricula == matricula_aluno), None)
-        
-        if aluno_cadastrado:
-            usuario = Responsavel(nome, cpf, rg, naturalidade, email, senha, numero, matricula_aluno, chave_acesso)
-        else:
-            print("Chave de acesso ou matrícula inválida.")
-            return None
-    
-    else:
-        print("Tipo de usuário inválido.")
-        return None
-    
-    usuario.cadastro()
-    return usuario
+        aluno = Aluno(nome, cpf, rg, naturalidade, email, senha, telefone, matricula, pai, mae, curso, turma_turno, serie)
+        usuarios.append(aluno)
+        aluno.cadastro()
 
-# Função de login
-def login(usuarios):
-    email = input("E-mail: ")
-    senha = input("Senha: ")
+    elif tipo_usuario == "2":
+        #verifica se há alunos cadastrados
+        if not any(isinstance(usuario, Aluno) for usuario in usuarios):
+            print("\nNão existem alunos cadastrados no sistema. Não é possível cadastrar um responsável.")
+            return None
+            
+        matricula = input("Matrícula do aluno: ")
+        chave_acesso = input("Chave de acesso fornecida pelo aluno: ")
+
+        #verifica se a chave de acesso e a matrícula correspondem a algum objeto
+        aluno_cadastrado = None
+        for usuario in usuarios:
+            if isinstance(usuario, Aluno) and usuario.get_matricula() == matricula and usuario.get_chave_acesso() == chave_acesso:
+                aluno_cadastrado = usuario
+                break
+
+        if aluno_cadastrado:
+            responsavel = Responsavel(nome, cpf, rg, naturalidade, email, senha, telefone, matricula, chave_acesso)
+            usuarios.append(responsavel)
+            responsavel.cadastro()
+            return responsavel
+        else:
+            print("\nChave de acesso ou matrícula inválida.")
+            return None
+
+    else:
+        print("\nTipo de usuário inválido.")
+        return None
+
+
+def set_login(usuarios):
+    email = input("E-mail: ").strip()
+    senha = input("Senha: ").strip()
 
     for usuario in usuarios:
-        if usuario.email == email and usuario.validar_login(senha):
-            print(f"Login bem-sucedido! Bem-vindo, {usuario.nome}.")
+        if usuario.get_email() == email and usuario.validar_login(senha):
+            print(f"\nLogin bem-sucedido! Bem-vindo, {usuario.get_nome()} :)")
             return True
 
+        
     print("Login falhou. E-mail ou senha incorretos.")
     return False
 
-# Função do menu
 def menu(usuarios):
+    usuarios = []
     while True:
-        print("\n1. Cadastrar usuário")
+        print("\nMenu:")
+        print("1. Cadastrar usuário")
         print("2. Login")
         print("3. Sair")
         opcao = input("Escolha uma opção: ")
@@ -214,13 +170,15 @@ def menu(usuarios):
             usuario = criar_usuario(usuarios)
             if usuario:
                 usuarios.append(usuario)
-        
+
         elif opcao == '2':
-            login(usuarios)
-        
+            set_login(usuarios)
+
         elif opcao == '3':
-            print("Saindo do sistema...")
+            print("\nSaindo do sistema...")
             break
-        
+
         else:
-            print("Opção inválida. Tente novamente.")
+            print("\nOpção inválida. Tente novamente.")
+
+
