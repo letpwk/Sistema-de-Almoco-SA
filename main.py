@@ -5,76 +5,31 @@
 #Letícia de Sousa e Silva
 #Maria Luisa Lôbo Gutierrez
 
-'''from sa import *
-from sa import Estudante, Responsavel
+from sa import Aluno, Responsavel, gerar_chave_acesso, menu
 
 usuarios = []
 
-# Função para calcular o quadrado de um número
-def calcular_quadrado(numero):
-    return numero ** 2
+#instância dos 4 objetos da subclasse Aluno
+aluno1 = Aluno("Beatriz", 12, 123, "Manaus", "bia@gmail.com", "senha789", 699963503, 2023106060034, "Bruno", "Adriana", "Informática", "Vespertino", "1")
 
-# Solicita ao usuário que insira um número
-numero = float(input("Digite um número: "))
+aluno2 = Aluno("Danielly", 34, 345, "Belo Horizonte", "dany@gmail.com", "senha123", 69981636274, 2023106060057, "Jorge", "Joanilce", "Edificações", "Vespertino", "3")
 
-# Calcula o quadrado do número
-resultado = calcular_quadrado(numero)
+aluno3 = Aluno("Letícia", 23, 234, "Rio de Janeiro", "let@gmail.com", "senha456", 69992894496, 2023106060052, "Willian", "Patrícia", "Eletrotécnica", "Matutino", "2")
 
-# Exibe o resultado
-print(f"O quadrado de {numero} é {resultado}")
+aluno4 = Aluno("Maria Luisa", 45, 456, "Curitiba", "marial@gmail.com", "senha101", 69993986151, 2023106060062, "Nelson", "Maria", "Química", "Matutino", "1")
 
+#instância dos 4 objetos da subclasse Responsável
+gerar_chave_acesso()
+responsavelbia = Responsavel("Adriana", 56, 567, "Porto Velho", "adriana@gmail.com", "senha102", 69001, 2023106060034, "1")
 
-def menu(UsuariosDoIfro):
-    print("Bem vindo ao sistema de cadastro do Instituto Federal de Rondônia!\n")
+responsavellet = Responsavel("Patrícia", 67, 678, "Ji-Paraná", "patricia@gmail.com", "senha203", 69002, 2023106060057, "2")
 
-    print( 1, "- Sou aluno do IFRO")
-    print('1 - Sou aluno do IFRO')
-    print('2 - Sou responsável legal de um aluno do IFRO')
-    opcao = input('Escolha a opção que melhor se encaixa:')
-    if opcao == '1':
-        estudante = Estudante()
-        estudante.cadastro()
-        
-    elif opcao == '2':
-        responsavel = Responsavel()
-        responsavel.cadastro()
-    else:
-        print('Opção inválida! Tente novamente.')
-        return
+responsaveldany = Responsavel("Joanilce", 78, 789, "Ariquemes", "joanilce@gmail.com", "senha304", 69003, 2023106060052, "3")
 
+responsavelmalu = Responsavel("Maria", 89, 890, "Cacoal", "maria@gmail.com", "senha405", 69004, 2023106060062, "4")
 
-    #aluno1 = Estudante(2023106060035, 'Juliana da Silva Costa', 'juliana@estudante.ifro.edu.br', 12345678910, 'jujuifiana', 'Informática', '2° ano Matutino', 'Roberval Costa Chaves', 'Marta da Silva Santos', '992343535')
-    #aluno1.cadastro()
-    #aluno1.login()
+#adicionando os usuários nas listas
+usuarios.extend([aluno1, aluno2, aluno3, aluno4, responsavelbia, responsavellet, responsaveldany, responsavelmalu])
 
-    estu = Estudante(None, None, None, None, None, None, None, None, None, None, None, None, None)
-    estu.cadastro()
-    estu.login()
-
-    respo = Responsavel(None, None, None, None, None, None, None, None)
-    respo.cadastro()
-    estu.login()'''
-    
-from sa import Aluno, Responsavel, menu
-
-# Lista para armazenar os usuários cadastrados
-usuarios = []
-
-# Instanciando 4 objetos da subclasse Aluno
-aluno1 = Aluno("Alice", "12", "123", "Porto Velho", "alice@example.com", "senha123", "001", "001", "Pai de Alice", "Mãe de Alice", "Engenharia", "T1", "1º")
-aluno2 = Aluno("Bruno", "23", "234", "Ji-Paraná", "bruno@example.com", "senha456", "002", "002", "Pai de Bruno", "Mãe de Bruno", "Matemática", "T2", "2º")
-aluno3 = Aluno("Carla", "34", "345", "Ariquemes", "carla@example.com", "senha789", "003", "003", "Pai de Carla", "Mãe de Carla", "Física", "T3", "3º")
-aluno4 = Aluno("Diego", "45", "456", "Cacoal", "diego@example.com", "senha101", "004", "004", "Pai de Diego", "Mãe de Diego", "Química", "T4", "4º")
-
-# Instanciando 4 objetos da subclasse Responsavel       nome, cpf, email, matricula_aluno, chave_acesso
-responsavel1 = Responsavel("Eduardo", "56", "eduardo@example.com", "001")
-responsavel2 = Responsavel("Fernanda", "67", "fernanda@example.com", "002")
-responsavel3 = Responsavel("Gabriela", "78", "gabriela@example.com", "003")
-responsavel4 = Responsavel("Henrique", "89", "henrique@example.com", "004")
-
-# Adicionando os objetos à lista de usuários
-usuarios.extend([aluno1, aluno2, aluno3, aluno4, responsavel1, responsavel2, responsavel3, responsavel4])
-
-# Executa o menu principal, passando a lista de usuários
 if __name__ == "__main__":
     menu(usuarios)
