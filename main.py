@@ -5,7 +5,7 @@
 #Letícia de Sousa e Silva
 #Maria Luisa Lôbo Gutierrez
 
-from sa import Aluno, Responsavel, gerar_chave_acesso, menu
+from sa import *
 
 usuarios = []
 

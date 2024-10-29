@@ -1,3 +1,4 @@
+from Usuario import *
 #subclasse
 class Aluno(Usuario):
     def __init__(self, nome, cpf, rg, naturalidade, email, senha, telefone, matricula, pai, mae, curso, turma_turno, serie):
@@ -15,7 +16,13 @@ class Aluno(Usuario):
 
     def get_matricula(self):
         return self.__matricula
+
+    def visualizarInfo(self):
+        return self.__info    
         
     def cadastro(self):
         print(f"\nAluno {self.get_nome()} cadastrado com sucesso!")
-        print(f"Chave de acesso para o responsável: {self.get_chave_acesso()}")
+        print(f"Chave de acesso para o responsável: {self.get_chave_acesso()}")     
+
+
+        

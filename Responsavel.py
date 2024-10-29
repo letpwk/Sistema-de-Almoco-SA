@@ -5,5 +5,9 @@ class Responsavel(Usuario):
         self.__matricula = matricula
         self.__chave_acesso = chave_acesso
 
+    def visualizarInfo(self):
+        return self.__info
+
+    
     def cadastro(self):
         print(f"\nResponsável {self.get_nome()} cadastrado com sucesso.")
