@@ -13,7 +13,12 @@ class Cronograma():
         return self.limiteTroca
     
     def consultarCronograma(self):
-        print(f'{self.cronograma}')
+        print('Dias da semana')
+        print('1 - Segunda-feira')
+        print('2 - Terça-feira')
+        print('3 - Quarta-feira')
+        print('4 - Quinta-feira')
+        print('5 - Sexta-feira')
         return self.cronograma
     
     def solicitarTrocaAlmoco(self):
@@ -23,28 +28,42 @@ class Cronograma():
         troca = input('Digite aqui: ')
 
         if troca == 1:
-            print('Dias da semana')
-            print('1 - Segunda-feira')
-            print('2 - Terça-feira')
-            print('3 - Quarta-feira')
-            print('4 - Quinta-feira')
-            print('5 - Sexta-feira')
-            dia = input('Selecione o dia da semana que deseja trocar: ') #como utilizar set aqui? #self.diaSemana?
+            self.consultarCronograma()
+
+            #para escolher o dia pelo qual quer trocar
+            diaAdicionado = input('Selecione o dia da semana que deseja adicionar: ')
+
+            if diaAdicionado == 1:
+                print('Segunda-feira adicionado!')
+            elif diaAdicionado == 2:
+                print('Terça-feira adicionado!')
+            elif diaAdicionado == 3:
+                print('Quarta-feira adicionado!')
+            elif diaAdicionado == 4:
+                print('Quinta-feira adicionado!')
+            elif diaAdicionado == 5:
+                print('Sexta-feira adicionado!')
+            else:
+                print('Número inválido, digite novamente.')
+
+
+            #para escolher o dia que ja tem almoço
+            diaRemovido = input('Selecione o dia da semana que deseja remover: ') #como utilizar set aqui? #self.diaSemana?
             
-            if dia == 1:
-                print('Segunda-feira selecionado!')
-            elif dia == 2:
-                print('Terça-feira selecionado!')
-            elif dia == 3:
-                print('Quarta-feira selecionado!')
-            elif dia == 4:
-                print('Quinta-feira selecionado!')
-            elif dia == 5:
-                print('Sexta-feira selecionado!')
+            if diaRemovido == 1:
+                print('Segunda-feira removido!')
+            elif diaRemovido == 2:
+                print('Terça-feira removido!')
+            elif diaRemovido == 3:
+                print('Quarta-feira removido!')
+            elif diaRemovido == 4:
+                print('Quinta-feira removido!')
+            elif diaRemovido == 5:
+                print('Sexta-feira removido!')
             else:
                 print('Número inválido, digite novamente.') #adicionar loop dos dias
 
-            
+                
 
             
     
