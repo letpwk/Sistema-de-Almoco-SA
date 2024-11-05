@@ -1,5 +1,4 @@
 from Atividade import *
-import Atividade
 
 class Cronograma:
     def __init__(self, motivo, limiteTroca, cronograma):

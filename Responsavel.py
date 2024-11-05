@@ -1,12 +1,5 @@
 #Subclasse da super classe Usuario - Relacionamento de herança
-import Usuario
-
-
-
-
-
-
-
+from Usuario import Usuario
 
 class Responsavel(Usuario):
     def __init__(self, nome, cpf, rg, naturalidade, email, senha, telefone, matricula, chave_acesso):

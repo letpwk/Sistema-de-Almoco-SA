@@ -5,9 +5,9 @@
 #Letícia de Sousa e Silva
 #Maria Luisa Lôbo Gutierrez
 
-import Usuario
-import Aluno
-import Responsavel
+from Aluno import Aluno
+from Responsavel import Responsavel
+from ServidorDepae import ServidorDepae
 
 usuarios = [] 
 

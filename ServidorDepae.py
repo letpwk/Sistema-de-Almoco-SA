@@ -1,4 +1,5 @@
-import Usuario
+from Usuario import Usuario
+from main import *
 #Subclasse da super classe Usuario 
 
 # - Relacionamento de herança com a super classe Usuario
@@ -16,20 +17,19 @@ class ServidorDepae(Usuario):
         return self.solicitacoes
     
     def visualizar_solicitacoes_depae(usuarios):
-    # O servidor DEPAE realiza o login
-        servidor = set_login(usuarios)  # Obtém o servidor logado
+        servidor = set_login(usuarios)  
     
-    if isinstance(servidor, ServidorDepae):  # Verifica se o usuário logado é um servidor DEPAE
-        matricula_aluno = input("Digite a matrícula do aluno para visualizar as solicitações de troca: ")
-        aluno = find_aluno_by_matricula(usuarios, matricula_aluno)  # Encontra o aluno pela matrícula
+        if isinstance(servidor, ServidorDepae):  
+            matricula_aluno = input("Digite a matrícula do aluno para visualizar as solicitações de troca: ")
+            aluno = find_aluno_by_matricula(usuarios, matricula_aluno)  
 
-        if aluno:
-            # Exibe as solicitações de troca de almoço do aluno
-            print(f"Solicitações de troca de almoço do aluno {aluno.get_nome()}: {aluno.cronograma.solicitacoes}")
+            if aluno:
+                # Exibe as solicitações de troca de almoço do aluno
+                print(f"Solicitações de troca de almoço do aluno {aluno.get_nome()}: {aluno.cronograma.solicitacoes}")
+            else:
+                print("Aluno não encontrado.")
         else:
-            print("Aluno não encontrado.")
-    else:
-        print("Você não tem permissão para visualizar as solicitações de troca de almoço.")
+            print("Você não tem permissão para visualizar as solicitações de troca de almoço.")
 
 
     def definirCronograma(self, cronograma): 

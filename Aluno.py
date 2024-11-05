@@ -4,8 +4,7 @@
 
 
 from Usuario import *
-import Cronograma
-import Usuario
+from Cronograma import Cronograma
 
 #método para gerar chave de acesso
 import random
