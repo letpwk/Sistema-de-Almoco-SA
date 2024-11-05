@@ -1,6 +1,7 @@
-#classe mãe
+#Classe Mãe - Relacionamento de Herança
+from abc import ABC, abstractmethod
 class Usuario(ABC):
-    def __init__(self, nome, cpf:int, rg:int, naturalidade, email, senha, telefone:int):
+    def __init__(self, nome, cpf, rg, naturalidade, email, senha, telefone):
         self.__nome = nome
         self.__cpf = cpf
         self.__rg = rg
@@ -36,3 +37,6 @@ class Usuario(ABC):
 
     def set_telefone(self, telefone):
         self.__telefone = telefone
+
+  
+

@@ -1,3 +1,4 @@
+# - Relacionamento de agregação da classe todo Cronograma e da classe parte Atividade
 class Atividade:
     def __init__(self, tipoAtividade, professor, horarioAtiv, dataInicio, dataFim, diaSemana):
         self.tipoAtividade = tipoAtividade

@@ -1,5 +1,7 @@
+import Usuario
+#Subclasse da super classe Usuario 
 
-#subclasse
+# - Relacionamento de herança com a super classe Usuario
 class ServidorDepae(Usuario):
     def __init__(self, nome, cpf, rg, naturalidade, email, senha, telefone, matricula, setor, data, motivo, limiteTroca):
         super().__init__(nome, cpf, rg, naturalidade, email, senha, telefone, matricula)
@@ -7,7 +9,33 @@ class ServidorDepae(Usuario):
         self._data = data
         self._motivo = motivo
         self._limiteTroca = limiteTroca
+        self.cronograma = None
+        self.solicitacoes = []
 
+    def consultar_solicitacoes(self):
+        return self.solicitacoes
+    
+    def visualizar_solicitacoes_depae(usuarios):
+    # O servidor DEPAE realiza o login
+    servidor = set_login(usuarios)  # Obtém o servidor logado
+    
+    if isinstance(servidor, ServidorDepae):  # Verifica se o usuário logado é um servidor DEPAE
+        matricula_aluno = input("Digite a matrícula do aluno para visualizar as solicitações de troca: ")
+        aluno = find_aluno_by_matricula(usuarios, matricula_aluno)  # Encontra o aluno pela matrícula
+
+        if aluno:
+            # Exibe as solicitações de troca de almoço do aluno
+            print(f"Solicitações de troca de almoço do aluno {aluno.get_nome()}: {aluno.cronograma.solicitacoes}")
+        else:
+            print("Aluno não encontrado.")
+    else:
+        print("Você não tem permissão para visualizar as solicitações de troca de almoço.")
+
+
+    def definirCronograma(self, cronograma): 
+        self.cronograma = cronograma  
+
+# - Relacionamento de associação entre a classe ServidorDepae e a classe Cronograma
     def consultarData(self):
         print(f'Data do seu almoço liberado:{self.data}')
         return self.data
@@ -20,24 +48,13 @@ class ServidorDepae(Usuario):
          print(f'Quantidade de trocas restantes: {self.limiteTroca}')
          return self.limiteTroca
 
-
-    def autorizarSolicitacao(self):
-        print('Você gostaria de autorizar solicitação?')
-        print('1 - Sim')
-        print('2 - Não')
-        solici = input('Digite aqui: ')
-
-        if solici == 1:
-            print('Troca realizada com sucesso')
-
-        elif solici == 2:
-            print('Troca não autorizada')
-
-
-     
-
-
-
+    def autorizar_solicitacao(self, aluno, dia_novo):
+        if dia_novo in aluno.cronograma.consultarCronograma():
+            print(f"Solicitação de troca para {dia_novo} do aluno {aluno.get_nome()} autorizada.")
+            aluno.cronograma.cronograma.append(dia_novo)
+            aluno.cronograma.solicitacoes.remove(dia_novo)
+        else:
+            print(f"Solicitação de troca para {dia_novo} do aluno {aluno.get_nome()} negada.")
 
         
     def cadastro(self):
