@@ -25,6 +25,14 @@ def find_aluno_by_matricula(usuarios, matricula):
         if isinstance(usuario, Aluno) and usuario.get_matricula() == matricula:
             return usuario
     return None  # Retorna None caso não encontre nenhum aluno com a matrícula informada
+
+
+def find_aluno_by_matricula(usuarios, matricula):
+    # Busca o aluno na lista de usuários pela matrícula
+    for usuario in usuarios:
+        if isinstance(usuario, Aluno) and usuario.get_matricula() == matricula:
+            return usuario
+    return None  # Retorna None caso não encontre nenhum aluno com a matrícula informada
  
 def criar_usuario(usuarios):
     print('\nComo você deseja se cadastrar?')

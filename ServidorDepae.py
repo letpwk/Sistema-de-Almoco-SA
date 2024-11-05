@@ -17,7 +17,7 @@ class ServidorDepae(Usuario):
     
     def visualizar_solicitacoes_depae(usuarios):
     # O servidor DEPAE realiza o login
-    servidor = set_login(usuarios)  # Obtém o servidor logado
+        servidor = set_login(usuarios)  # Obtém o servidor logado
     
     if isinstance(servidor, ServidorDepae):  # Verifica se o usuário logado é um servidor DEPAE
         matricula_aluno = input("Digite a matrícula do aluno para visualizar as solicitações de troca: ")
