@@ -1,5 +1,6 @@
 from Usuario import Usuario
 from main import *
+
 #Subclasse da super classe Usuario 
 
 # - Relacionamento de herança com a super classe Usuario
