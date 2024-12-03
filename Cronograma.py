@@ -39,7 +39,10 @@ class Cronograma:
             print('Você gostaria de alterar o dia de almoço?')
             print('1 - Sim')
             print('2 - Não')
-            troca = input('Digite aqui: ')
+            try:
+                troca = input('Digite aqui: ')
+            except ValueError:
+                print("Inválido! Digite o valor correto:")
 
             if troca == '1':  
                 self.consultarCronograma() 
