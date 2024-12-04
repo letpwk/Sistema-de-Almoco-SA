@@ -96,30 +96,30 @@ def set_login(usuarios):
 
 def menu(usuarios):
     while True:
-        print("\nMenu:")
-        print("1. Cadastrar usuário")
-        print("2. Login")
-        print("3. Consultar Cronograma")
-        print("4. Solicitar Troca de Almoço")
-        print("5. Visualizar Solicitações DEPAE")
-        print("6. Sair")
-        opcao = input("Escolha uma opção: ")
+        try:
+            print("\nMenu:")
+            print("1. Cadastrar usuário")
+            print("2. Login")
+            print("3. Consultar Cronograma")
+            print("4. Solicitar Troca de Almoço")
+            print("5. Visualizar Solicitações DEPAE")
+            print("6. Sair")
+            opcao = input("Escolha uma opção: ")
 
-        if opcao == '1':
-            criar_usuario(usuarios)
-        elif opcao == '2':
-            set_login(usuarios)
-        elif opcao == '3':
-            consultar_cronograma(usuarios)
-        elif opcao == '4':
-            solicitar_troca(usuarios)
-        elif opcao == '5':
-            visualizar_solicitacoes_depae(usuarios)
-        elif opcao == '6':
-            print("\nSaindo do sistema...")
-            break
-        else:
-            print("\nOpção inválida. Tente novamente.")
+            if opcao == '1':
+                criar_usuario(usuarios)
+            elif opcao == '2':
+                set_login(usuarios)
+            elif opcao == '3':
+                consultar_cronograma(usuarios)
+            elif opcao == '4':
+                solicitar_troca(usuarios)
+            elif opcao == '5':
+                visualizar_solicitacoes_depae(usuarios)
+            elif opcao == '6':
+                print("\nSaindo do sistema...")
+        except: print("\nOpção inválida. Tente novamente.")
+        break
 
 def consultar_cronograma(usuarios):
     aluno = set_login(usuarios)  # Obtém o aluno logado
