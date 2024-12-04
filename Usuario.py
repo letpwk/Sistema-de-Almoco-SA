@@ -37,6 +37,8 @@ class Usuario(ABC):
 
     def set_telefone(self, telefone):
         self.__telefone = telefone
-
-  
+        if set_telefone == str:
+            raise ValueError
+        else: return set_telefone
+    
 
