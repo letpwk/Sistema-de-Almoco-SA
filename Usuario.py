@@ -28,6 +28,9 @@ class Usuario(ABC):
 
     def set_nome(self, nome):
         self.__nome = nome
+        if self.__nome == int:
+            raise ValueError
+        else: return self.__nome
 
     def set_email(self, email):
         self.__email = email
@@ -37,8 +40,8 @@ class Usuario(ABC):
 
     def set_telefone(self, telefone):
         self.__telefone = telefone
-        if set_telefone == str:
+        if self.__telefone == str:
             raise ValueError
-        else: return set_telefone
+        else: return self.__telefone
     
 
