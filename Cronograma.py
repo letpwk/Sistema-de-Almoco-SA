@@ -61,10 +61,10 @@ class Cronograma:
                             elif diaAdicionado == 5:
                                 print('Sexta-feira adicionado!')
                                 break
-                            else:
-                                print('Número inválido! Por favor, digite novamente:')
                         except ValueError:
                                 print('Número inválido! Por favor, digite novamente: ')
+                        finally: print("O processo de solicitação de almoço terminou") 
+                        break
 
                 while True:
                         try:
@@ -84,16 +84,18 @@ class Cronograma:
                             elif diaRemovido == 5:
                                 print('Sexta-feira removido!')
                                 break
-                            else:
-                                print('Número inválido! Por favor, digite novamente:')
                         except ValueError:
                             print('Número inválido! Por favor, digite novamente: ')
+                        finally: print("O processo de solicitação de almoço terminou") 
                     
                         break 
 
-            elif troca == '2': 
-                print('Você optou por não alterar o dia de almoço.')
-                break  
+            elif troca == '2':
+                while True:
+                    try:
+                        print('Você optou por não alterar o dia de almoço.')
+                        break  
 
-            else:
-                print('Número inválido! Por favor, digite novamente:')
+                    except ValueError: print('Número inválido! Por favor, digite novamente:')
+                    finally: print("O processo de solicitação de almoço terminou")
+                    break
