@@ -79,6 +79,7 @@ def criar_usuario(usuarios):
 
     except ValueError:
             print("\nTipo de usuário inválido.")
+    finally: print("O processo de acesso ao sistema terminou")
     return None
 
 
@@ -159,7 +160,7 @@ aluno1 = Aluno("Beatriz", 12, 123, "Manaus", "bia@gmail.com", "senha789", 699963
 
 aluno2 = Aluno("Danielly", 34, 345, "Belo Horizonte", "dany@gmail.com", "senha123", 69981636274, 2023106060057, "Jorge", "Joanilce", "Edificações", "Vespertino", "3")
 
-aluno3 = Aluno("Letícia", 23, 234, "Rio de Janeiro", "let@gmail.com", "senha456", 69992894496, 2023106060052, "Willian", "Patrícia", "Eletrotécnica", "Matutino", "2")
+aluno3 = Aluno("Letícia", 23, 234, "Rio de Janeiro", "let@gmail.com", "senha456", 69992894496, 2023106060052, "Willian", "Pat rícia", "Eletrotécnica", "Matutino", "2")
 
 aluno4 = Aluno("Maria Luisa", 45, 456, "Curitiba", "marial@gmail.com", "senha101", 69993986151, 2023106060062, "Nelson", "Maria", "Química", "Matutino", "1")
 
