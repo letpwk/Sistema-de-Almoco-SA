@@ -68,6 +68,8 @@ class Cronograma:
                             print('Número inválido! Por favor, digite novamente:')
                     except ValueError:
                         print('Número inválido! Por favor, digite novamente:')
+                    except NameError:
+                        print ("Inválido! Digite o valor correto:")
 
                 while True:
                     try:

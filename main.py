@@ -30,7 +30,10 @@ def criar_usuario(usuarios):
     print('\nComo você deseja se cadastrar?')
     print('1 - Aluno')
     print('2 - Responsável')
-    tipo_usuario = input('Escolha o tipo de usuário: ')
+    try:
+        tipo_usuario = input('Escolha o tipo de usuário: ')
+    except ValueError:
+        print("Inválido! Digite o valor correto:")
 
     nome = input("\nNome: ")
     cpf = input("CPF: ")
