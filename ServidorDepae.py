@@ -22,7 +22,7 @@ class ServidorDepae(Usuario):
     
         if isinstance(servidor, ServidorDepae):  
             matricula_aluno = input("Digite a matrícula do aluno para visualizar as solicitações de troca: ")
-            aluno = find_aluno_by_matricula(usuarios, matricula_aluno)  
+            aluno = acharAluno_pelaMatricula(usuarios, matricula_aluno)  
 
             if aluno:
                 # Exibe as solicitações de troca de almoço do aluno
@@ -46,8 +46,8 @@ class ServidorDepae(Usuario):
         return self.motivo   
 
     def consultarLimiteTroca(self):  
-         print(f'Quantidade de trocas restantes: {self.limiteTroca}')
-         return self.limiteTroca
+        print(f'Quantidade de trocas restantes: {self.limiteTroca}')
+        return self.limiteTroca
 
     def autorizar_solicitacao(self, aluno, dia_novo):
         if dia_novo in aluno.cronograma.consultarCronograma():

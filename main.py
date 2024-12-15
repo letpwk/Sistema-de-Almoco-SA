@@ -19,66 +19,71 @@ def gerar_chave_acesso():
         chave += random.choice(caracteres)
     return chave
 
-def find_aluno_by_matricula(usuarios, matricula):
-    # Busca o aluno na lista de usuários pela matrícula
+def acharAluno_pelaMatricula(usuarios, matricula):
+    #busca o aluno na lista de usuários pela matrícula
     for usuario in usuarios:
         if isinstance(usuario, Aluno) and usuario.get_matricula() == matricula:
             return usuario
-    return None  # Retorna None caso não encontre nenhum aluno com a matrícula informada
+    return None  #retorna None caso não encontre nenhum aluno com a matrícula informada
 
 def criar_usuario(usuarios):
     print('\nComo você deseja se cadastrar?')
     print('1 - Aluno')
     print('2 - Responsável')
-    tipo_usuario = input('Escolha o tipo de usuário: ')
+    try:
+        tipo_usuario = input('Escolha o tipo de usuário: ')
 
-    nome = input("\nNome: ")
-    cpf = input("CPF: ")
-    rg = input("RG: ")
-    naturalidade = input("Naturalidade: ")
-    email = input("E-mail: ")
-    senha = input("Senha: ")
-    telefone = input("Número de celular: ")
+        nome = input("\nNome: ")
+        cpf = input("CPF: ")
+        rg = input("RG: ")
+        naturalidade = input("Naturalidade: ")
+        email = input("E-mail: ")
+        senha = input("Senha: ")
+        telefone = input("Número de celular: ")
 
-    if tipo_usuario == "1":
-        matricula = input("Matrícula: ")
-        pai = input("Pai: ")
-        mae = input("Mãe: ")
-        curso = input("Curso: ")
-        turma_turno = input("Turma/Turno: ")
-        serie = input("Série: ")
-        aluno = Aluno(nome, cpf, rg, naturalidade, email, senha, telefone, matricula, pai, mae, curso, turma_turno, serie)
-        usuarios.append(aluno)
-        aluno.cadastro()
+        if tipo_usuario == "1":
+            matricula = input("Matrícula: ")
+            pai = input("Pai: ")
+            mae = input("Mãe: ")
+            curso = input("Curso: ")
+            turma_turno = input("Turma/Turno: ")
+            serie = input("Série: ")
+            aluno = Aluno(nome, cpf, rg, naturalidade, email, senha, telefone, matricula, pai, mae, curso, turma_turno, serie)
+            usuarios.append(aluno)
+            aluno.cadastro()
 
-    elif tipo_usuario == "2":
-        #verifica se há alunos cadastrados
-        if not any(isinstance(usuario, Aluno) for usuario in usuarios):
-            print("\nNão existem alunos cadastrados no sistema. Não é possível cadastrar um responsável.")
-            return None
-            
-        matricula = input("Matrícula do aluno: ")
-        chave_acesso = input("Chave de acesso fornecida pelo aluno: ")
+        elif tipo_usuario == "2":
+            #verifica se há alunos cadastrados
+            if not any(isinstance(usuario, Aluno) for usuario in usuarios):
+                print("\nNão existem alunos cadastrados no sistema. Não é possível cadastrar um responsável.")
+                return None
+                
+            matricula = input("Matrícula do aluno: ")
+            chave_acesso = input("Chave de acesso fornecida pelo aluno: ")
 
-        #verifica se a chave de acesso e a matrícula correspondem a algum objeto
-        aluno_cadastrado = None
-        for usuario in usuarios:
-            if isinstance(usuario, Aluno) and usuario.get_matricula() == matricula and usuario.get_chave_acesso() == chave_acesso:
-                aluno_cadastrado = usuario
-                break
+            #verifica se a chave de acesso e a matrícula correspondem a algum objeto
+            aluno_cadastrado = None
+            for usuario in usuarios:
+                if isinstance(usuario, Aluno) and usuario.get_matricula() == matricula and usuario.get_chave_acesso() == chave_acesso:
+                    aluno_cadastrado = usuario
+                    break
 
-        if aluno_cadastrado:
-            responsavel = Responsavel(nome, cpf, rg, naturalidade, email, senha, telefone, matricula, chave_acesso)
-            usuarios.append(responsavel)
-            responsavel.cadastro()
-            return responsavel
+            if aluno_cadastrado:
+                responsavel = Responsavel(nome, cpf, rg, naturalidade, email, senha, telefone, matricula, chave_acesso)
+                usuarios.append(responsavel)
+                responsavel.cadastro()
+                return responsavel
+            else:
+                print("\nChave de acesso ou matrícula inválida.")
+                return None
+
         else:
-            print("\nChave de acesso ou matrícula inválida.")
+            print("\nTipo de usuário inválido.")
             return None
-
-    else:
-        print("\nTipo de usuário inválido.")
-        return None
+    except ValueError:
+        print('Opa! Este valor é inválido, digite aqui um número de 1 a 2, por favor: ')
+    finally:
+        print('Etapa de processar a troca do dia de almoço concluída!')
 
 
 def set_login(usuarios):
@@ -103,33 +108,37 @@ def menu(usuarios):
         print("4. Solicitar Troca de Almoço")
         print("5. Visualizar Solicitações DEPAE")
         print("6. Sair")
-        opcao = input("Escolha uma opção: ")
+        try:
+            opcao = input("Escolha uma opção: ")
 
-        if opcao == '1':
-            criar_usuario(usuarios)
-        elif opcao == '2':
-            set_login(usuarios)
-        elif opcao == '3':
-            consultar_cronograma(usuarios)
-        elif opcao == '4':
-            solicitar_troca(usuarios)
-        elif opcao == '5':
-            visualizar_solicitacoes_depae(usuarios)
-        elif opcao == '6':
-            print("\nSaindo do sistema...")
-            break
-        else:
-            print("\nOpção inválida. Tente novamente.")
+            if opcao == '1':
+                criar_usuario(usuarios)
+            elif opcao == '2':
+                set_login(usuarios)
+            elif opcao == '3':
+                consultar_cronograma(usuarios)
+            elif opcao == '4':
+                solicitar_troca(usuarios)
+            elif opcao == '5':
+                visualizar_solicitacoes_depae(usuarios)
+            elif opcao == '6':
+                print("\nSaindo do sistema...")
+                break
+            else:
+                print("\nOpção inválida. Tente novamente.")
+        except ValueError:
+            print('Opa! Este valor é inválido, digite aqui um número de 1 a 6, por favor: ')
+            
 
 def consultar_cronograma(usuarios):
-    aluno = set_login(usuarios)  # Obtém o aluno logado
+    aluno = set_login(usuarios)  #obtém o aluno logado
     if isinstance(aluno, Aluno):
         print(f"Seu cronograma de almoço é: {aluno.consultar_cronograma()}")
     else:
         print("Você não tem permissão para consultar o cronograma de almoço.")
 
 def solicitar_troca(usuarios):
-    aluno = set_login(usuarios)  # Obtém o aluno logado
+    aluno = set_login(usuarios)  #obtém o aluno logado
     if isinstance(aluno, Aluno):
         dia_novo = input("Digite o dia novo para a troca (Ex: Segunda-feira): ")
         aluno.solicitar_troca(dia_novo)
@@ -137,14 +146,14 @@ def solicitar_troca(usuarios):
         print("Você não tem permissão para solicitar a troca de almoço.")
 
 def visualizar_solicitacoes_depae(usuarios):
-    servidor = set_login(usuarios)  # Obtém o servidor logado
+    servidor = set_login(usuarios)  #obtém o servidor logado
     
-    if isinstance(servidor, ServidorDepae):  # Verifica se o usuário logado é um servidor DEPAE
+    if isinstance(servidor, ServidorDepae):  #verifica se o usuário logado é um servidor DEPAE
         matricula_aluno = input("Digite a matrícula do aluno para visualizar as solicitações de troca: ")
-        aluno = find_aluno_by_matricula(usuarios, matricula_aluno)  # Encontra o aluno pela matrícula
+        aluno = acharAluno_pelaMatricula(usuarios, matricula_aluno)
 
         if aluno:
-            # Exibe as solicitações de troca de almoço do aluno
+            #exibe as solicitações de troca de almoço do aluno
             print(f"Solicitações de troca de almoço do aluno {aluno.get_nome()}: {aluno.cronograma.solicitacoes}")
         else:
             print("Aluno não encontrado.")

@@ -38,5 +38,3 @@ class Usuario(ABC):
     def set_telefone(self, telefone):
         self.__telefone = telefone
 
-  
-

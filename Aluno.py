@@ -52,5 +52,3 @@ class Aluno(Usuario):
     def cadastro(self):
         print(f"\nAluno {self.get_nome()} cadastrado com sucesso!")
         print(f"Chave de acesso para o responsável: {self.get_chave_acesso()}") 
-
-        
