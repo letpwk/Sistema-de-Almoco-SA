@@ -39,7 +39,10 @@ class Cronograma:
             print('Você gostaria de alterar o dia de almoço?')
             print('1 - Sim')
             print('2 - Não')
-            troca = input('Digite aqui: ')
+            try:
+                troca = input('Digite aqui: ')
+            except ValueError:
+                print('Opa! Este valor é inválido, digite aqui um que aceitamos, por favor: ')
 
             if troca == '1':  
                 self.consultarCronograma() 
@@ -62,9 +65,9 @@ class Cronograma:
                             print('Sexta-feira adicionado!')
                             break
                         else:
-                            print('Número inválido! Por favor, digite novamente:')
+                            print('Número inválido! Por favor, digite novamente: ')
                     except ValueError:
-                        print('Número inválido! Por favor, digite novamente:')
+                        print('Número inválido! Por favor, digite novamente: ')
 
                 while True:
                     try:
@@ -85,10 +88,9 @@ class Cronograma:
                             print('Sexta-feira removido!')
                             break
                         else:
-                            print('Número inválido! Por favor, digite novamente:')
+                            print('Número inválido! Por favor, digite novamente: ')
                     except ValueError:
-                        print('Número inválido! Por favor, digite novamente:')
-                
+                        print('Número inválido! Por favor, digite novamente: ')
                 break 
 
             elif troca == '2': 
