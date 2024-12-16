@@ -3,7 +3,7 @@
 # - Relacionamento de associação com a subclasse Responsavel
 
 
-from Usuario import *
+from Usuario import * #importa a biblioteca main
 from Cronograma import Cronograma
 
 #método para gerar chave de acesso

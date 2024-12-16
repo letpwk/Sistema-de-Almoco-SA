@@ -1,4 +1,4 @@
-from Atividade import *
+from Atividade import * #importa a biblioteca main
 
 class Cronograma:
     def __init__(self, motivo, limiteTroca, cronograma):

@@ -9,6 +9,7 @@ from Aluno import Aluno
 from Responsavel import Responsavel
 from ServidorDepae import ServidorDepae
 
+#lista de usuários
 usuarios = [] 
 
 import random
@@ -174,7 +175,7 @@ responsaveldany = Responsavel("Joanilce", 78, 789, "Ariquemes", "joanilce@gmail.
 
 responsavelmalu = Responsavel("Maria", 89, 890, "Cacoal", "maria@gmail.com", "senha405", 69004, 2023106060062, "4")
 
-#adicionando os usuários nas listas
+#adicionando os alunos e responsáveis na lista de usuários
 usuarios.extend([aluno1, aluno2, aluno3, aluno4, responsavelbia, responsavellet, responsaveldany, responsavelmalu])
 
 if __name__ == "__main__":
