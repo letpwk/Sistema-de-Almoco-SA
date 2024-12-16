@@ -33,21 +33,118 @@ def criar_usuario(usuarios):
     try:
         tipo_usuario = input('Escolha o tipo de usuário: ')
 
-        nome = input("\nNome: ")
-        cpf = input("CPF: ")
-        rg = input("RG: ")
-        naturalidade = input("Naturalidade: ")
-        email = input("E-mail: ")
+        while True:
+            try:
+                nome = input("\nNome: ")
+                if not nome.replace(" ", "").isalpha():
+                    raise ValueError("O campo 'Nome' aceita apenas letras.")
+                break
+            except ValueError as e:
+                print(e)
+                
+        while True:
+            try:
+                cpf = input("CPF: ")
+                if not cpf.isdigit() and len(cpf) == 11:
+                    raise ValueError("O campo 'CPF' deve conter apenas números e ter 11 dígitos.")
+                break
+            except ValueError as e:
+                print(e)
+                
+        while True:
+            try:
+                rg = input("RG: ")
+                if not rg.isdigit():
+                    raise ValueError("O campo 'RG' deve conter apenas números.")
+                break
+            except ValueError as e:
+                print(e)
+                
+        while True:
+            try:
+                naturalidade = input("Naturalidade: ")
+                if not naturalidade.replace(" ", "").isalpha():
+                    raise ValueError("O campo 'Naturalidade' aceita apenas letras.")
+                break
+            except ValueError as e:
+                print(e)
+        
+        while True:
+            try:
+                email = input("E-mail: ")
+                if not "@" in email and "." in email:
+                    raise ValueError("Digite um e-mail válido.")
+                break
+            except ValueError as e:
+                print(e)
+        
+        #        
         senha = input("Senha: ")
-        telefone = input("Número de celular: ")
+        
+        while True: 
+            try:
+                telefone = input("Número de celular: ")
+                if not telefone.isdigit() and len(telefone) in [10, 11]:
+                    raise ValueError("O campo 'Número de celular' deve conter apenas números e ter 10 ou 11 dígitos.")
+                break
+            except ValueError as e:
+                print(e)
 
         if tipo_usuario == "1":
             matricula = input("Matrícula: ")
-            pai = input("Pai: ")
-            mae = input("Mãe: ")
-            curso = input("Curso: ")
-            turma_turno = input("Turma/Turno: ")
-            serie = input("Série: ")
+            
+            while True:
+                try:
+                    pai = input("Pai: ")
+                    if not pai.replace(" ", "").isalpha():
+                        raise ValueError("O campo 'Pai' aceita apenas letras.")
+                    break
+                except ValueError as e:
+                    print(e)
+                
+            while True:
+                try:
+                    mae = input("Mãe: ")
+                    if not mae.replace(" ", "").isalpha():
+                        raise ValueError("O campo 'Mãe' aceita apenas letras.")
+                    break
+                except ValueError as e:
+                    print(e)
+            
+            while True:
+                try:
+                    curso = input("Curso: ")
+                    if not curso.isalpha():
+                        raise ValueError("O campo 'Curso' aceita apenas letras.")
+                    elif curso == "Informática" or "Química" or "Eletrotécnica" or "Edificações":
+                        raise ValueError("Digite um curso existente.")
+                    break
+                except ValueError as e:
+                    print(e)
+            
+            while True:
+                try:
+                    turma_turno = input("Turma/Turno: ")
+                    if not turma_turno.isalpha():
+                        raise ValueError("O campo 'Turma/Turno' aceita apenas letras.")
+                    elif not turma_turno == "A" or "a" or "B" or "b" or "Matutino" or "matutino" or "Vespertino" or "vespertino":
+                        raise ValueError("Digite uma turma existente.")
+                    break
+                except ValueError as e:
+                    print(e)
+                    
+            while True:
+                try:
+                    serie = input("Série: ")
+                    if not serie.isdigit() and len(serie) in [1]:
+                        raise ValueError("O campo 'Série' deve conter apenas números e ter 1 dígito.")
+                    elif not serie == 1 or 2 or 3:
+                        raise ValueError("Digite uma série existente.")
+                    break
+                except ValueError as e:
+                    print(e)
+                
+            
             aluno = Aluno(nome, cpf, rg, naturalidade, email, senha, telefone, matricula, pai, mae, curso, turma_turno, serie)
             usuarios.append(aluno)
             aluno.cadastro()
