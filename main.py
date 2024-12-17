@@ -8,8 +8,9 @@
 from Aluno import Aluno
 from Responsavel import Responsavel
 from ServidorDepae import ServidorDepae
+from minhaexcecao import *
 
-usuarios = [] 
+usuarios = [] #lista para armazenar usuário
 
 import random
 def gerar_chave_acesso():
@@ -30,18 +31,55 @@ def criar_usuario(usuarios):
     print('\nComo você deseja se cadastrar?')
     print('1 - Aluno')
     print('2 - Responsável')
+    while True:
+        try:
+            tipo_usuario = input('Escolha o tipo de usuário: ')
+        except ValueError:
+            print("Inválido! Digite o valor correto:")
+        break
+    while True:
+        try:
+            nome = input("\nNome: ")
+            if not nome.replace('','').isalpha():
+                raise ValueError("Inválido! Válido apenas letras neste campo. ")
+            break 
+        except ValueError:
+            print("Inválido! Digite o valor correto.")  
+    while True:
+        try:
+            cpf = input("CPF: ")
+        except ValueError:
+            print ("Inválido! Digite o valor correto.")
+        break
+    while True:
+        try:
+            rg = input("RG: ")
+        except ValueError:
+            print("Inválido! Digite o valor correto.")
+        break
+    while True:
+        try:
+            naturalidade = input("Naturalidade: ")
+        except  ValueError:
+            print ("Inválido! Digite o valor correto.")
+        break
+    while True:
+        try:
+            email = input("E-mail: ")
+            if not "@" and "." in email:
+                raise ValueError("Digite um e-mail válido")
+            break
+        except ValueError as e:
+            print (e)
     try:
-        tipo_usuario = input('Escolha o tipo de usuário: ')
+        senha = input("Senha: ")
+        verificar_senha(senha)
+    except MinhaExceptionSenha:
+        print('Inválido! A senha deve ter pelo menos 7 caracteres.')
+    try:
+        telefone = input("Número de celular: ")
     except ValueError:
-        print("Inválido! Digite o valor correto:")
-
-    nome = input("\nNome: ")
-    cpf = input("CPF: ")
-    rg = input("RG: ")
-    naturalidade = input("Naturalidade: ")
-    email = input("E-mail: ")
-    senha = input("Senha: ")
-    telefone = input("Número de celular: ")
+        print("Inválido! Digite o valor correto.")
 
     if tipo_usuario == "1":
         matricula = input("Matrícula: ")

@@ -12,7 +12,7 @@ class ServidorDepae(Usuario):
         self._motivo = motivo
         self._limiteTroca = limiteTroca
         self.cronograma = None
-        self.solicitacoes = []
+        self.solicitacoes = []  # Lista para armazenar as solicitações do almoço
 
     def consultar_solicitacoes(self):
         return self.solicitacoes
