@@ -33,6 +33,9 @@ def criar_usuario(usuarios):
     try:
         tipo_usuario = input('Escolha o tipo de usuário: ')
 
+        if tipo_usuario not in ["1", "2"]:
+            raise ValueError("Tipo de usuário inválido. Digite '1' para Aluno e '2' para Responsável.")
+
         nome = input("\nNome: ")
         while True:
             try: 
