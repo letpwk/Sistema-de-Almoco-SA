@@ -8,6 +8,7 @@
 from Aluno import Aluno
 from Responsavel import Responsavel
 from ServidorDepae import ServidorDepae
+from MyException import *
 
 #lista de usuários
 usuarios = [] 
@@ -82,6 +83,12 @@ def criar_usuario(usuarios):
             print("\nTipo de usuário inválido.")
     finally: print("O processo de acesso ao sistema terminou")
     return None
+
+try:
+    senha = input("Senha: ")
+    verificar_senha(senha)
+except MyException:
+    print('Inválido! A senha deve ter pelo menos 7 caracteres.')
 
 
 def set_login(usuarios):
