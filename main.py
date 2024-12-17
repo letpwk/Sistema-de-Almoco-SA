@@ -8,6 +8,7 @@
 from Aluno import Aluno
 from Responsavel import Responsavel
 from ServidorDepae import ServidorDepae
+from Matricula import* 
 
 usuarios = [] # Lista para armazenar usuários cadastrados
 
@@ -55,7 +56,17 @@ def criar_usuario(usuarios):
                     print('Aceitamos apenas números. Digite novamente:')
 
             if tipo_usuario == "1":
-                matricula = input("Matrícula: ")
+                while True:
+                    try:
+                        matricula = input("Matrícula: ")
+                        verificar_matricula(matricula)
+
+                    except Matricula:
+                        print('Matrícula inválida')
+                        continue
+
+                    break
+                
                 pai = input("Pai: ")
                 mae = input("Mãe: ")
                 curso = input("Curso: ")
@@ -107,8 +118,7 @@ def set_login(usuarios):
         if usuario.get_email() == email and usuario.validar_login(senha):
             print(f"\nLogin bem-sucedido! Bem-vindo, {usuario.get_nome()} :)")
             return True
-
-        
+      
     print("Login falhou. E-mail ou senha incorretos.")
     return False
 
