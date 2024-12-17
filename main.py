@@ -9,7 +9,7 @@ from Aluno import Aluno
 from Responsavel import Responsavel
 from ServidorDepae import ServidorDepae
 
-usuarios = [] 
+usuarios = [] # Lista para armazenar usuários cadastrados
 
 import random
 def gerar_chave_acesso():
