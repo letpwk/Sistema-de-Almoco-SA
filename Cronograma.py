@@ -5,7 +5,7 @@ class Cronograma:
         self.motivo = motivo
         self.limiteTroca = limiteTroca
         self.cronograma = cronograma
-        self.solicitacoes = []  #armazena as solicitações de troca de almoço
+        self.solicitacoes = []  #lista para armazenar as solicitações de troca de almoço
         #Relacionamento de agregação da classe todo Cronograma e da classe parte Atividade
         self.atividade = Atividade()
 

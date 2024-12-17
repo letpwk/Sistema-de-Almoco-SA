@@ -12,7 +12,7 @@ class ServidorDepae(Usuario):
         self._motivo = motivo
         self._limiteTroca = limiteTroca
         self.cronograma = None
-        self.solicitacoes = []
+        self.solicitacoes = [] #lista para armazenar as solicitações de troca de almoço
 
     def consultar_solicitacoes(self):
         return self.solicitacoes
@@ -25,7 +25,6 @@ class ServidorDepae(Usuario):
             aluno = acharAluno_pelaMatricula(usuarios, matricula_aluno)  
 
             if aluno:
-                # Exibe as solicitações de troca de almoço do aluno
                 print(f"Solicitações de troca de almoço do aluno {aluno.get_nome()}: {aluno.cronograma.solicitacoes}")
             else:
                 print("Aluno não encontrado.")

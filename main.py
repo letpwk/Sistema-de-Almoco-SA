@@ -8,7 +8,9 @@
 from Aluno import Aluno
 from Responsavel import Responsavel
 from ServidorDepae import ServidorDepae
+from excecoes import *
 
+#lista para armazenar os usuários 
 usuarios = [] 
 
 import random
@@ -20,7 +22,6 @@ def gerar_chave_acesso():
     return chave
 
 def acharAluno_pelaMatricula(usuarios, matricula):
-    #busca o aluno na lista de usuários pela matrícula
     for usuario in usuarios:
         if isinstance(usuario, Aluno) and usuario.get_matricula() == matricula:
             return usuario
@@ -32,7 +33,7 @@ def criar_usuario(usuarios):
     print('2 - Responsável')
     try:
         tipo_usuario = input('Escolha o tipo de usuário: ')
-
+        #a partir daqui há try, except e raise para verificação dos campos na hora do cadastro
         while True:
             try:
                 nome = input("\nNome: ")
@@ -91,7 +92,13 @@ def criar_usuario(usuarios):
                 print(e)
 
         if tipo_usuario == "1":
-            matricula = input("Matrícula: ")
+            while True:
+                try: 
+                    matricula = input("Matrícula: ")
+                    MatriculaVerific()
+                except MatriculaInvalida:
+                    print("O campo 'Matrícula' deve conter apenas números e ter 13 dígitos.")
+                    break
             
             while True:
                 try:
